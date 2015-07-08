@@ -1,0 +1,654 @@
+<HTML>
+
+<HEAD>
+
+<TITLE>Sisyphus I: Room Allocation</TITLE>
+
+</HEAD>
+
+<BODY BGCOLOR="DDDDFF">
+
+<H1 ALIGN="CENTER">
+
+Documentation<BR>for the Sisyphus-I<BR>Room Allocation Task</H1>
+
+<P>
+
+We want to compare different approaches
+
+to the modeling of problem-solving processes in knowledge-based
+
+systems and the influences of the models on the knowledge acquisition
+
+activities. To this purpose we give a short description of a sample
+
+problem concerned with office assignment in a research environment.
+
+Research groups who participate in Sisyphus-I are requested
+
+to describe how this problem can be solved and represented in
+
+their approach. To ease comparison and to allow for a well-founded
+
+discussion, we propose a structure for the reports. Please
+
+adhere to it.
+
+<P>
+
+In this second round of Sisyphus-I, we decided to use almost the
+
+same problem statement, that is the office-assignment
+
+task. It has been changed a little bit, by adding a second set
+
+of slightly changed data (see Section 2.5). We assume that this
+
+will give the reader an even better chance to understand the functioning
+
+of your approach. Additionally, this introduces the issue of brittleness.We
+
+would like to know how a model reacts to unusual cases.
+
+<P>
+
+Furthermore, we require <I>traces</I> of the problem-solving processes
+
+of your system for both problem statements. This means  that this
+
+year we want descriptions of <I>operational</I>  problem solvers.
+
+
+
+<H2>1. Format of Reports</H2>
+
+<P>
+
+These formatting instructions resulted from the Sisyphus-I discussions
+
+at EKAW91. Please adhere to them. Remember that your Sisyphus-I
+
+article is a contribution to an ongoing discussion, and not a
+
+full scientific paper.
+
+
+
+<P><DIV ALIGN="CENTER">
+
+<TABLE BORDER CELLPADDING=6>
+
+
+
+<TR><TD WIDTH=56><B>Section</B></TD><TD WIDTH=282><B>Contents</B>
+
+</TD><TD WIDTH=56><B>Pages</B></TD></TR>
+
+
+
+<TR><TD WIDTH=56><B>1</B></TD><TD WIDTH=282>Tool Description and generic structures
+
+</TD><TD WIDTH=56>5</TD></TR>
+
+
+
+<TR><TD WIDTH=56><B>2</B></TD><TD WIDTH=282>Protocol Interpretation, assumptions, decisions taken about unclear points
+
+</TD><TD WIDTH=56>1</TD></TR>
+
+
+
+<TR><TD WIDTH=56><B>3</B></TD><TD WIDTH=282>Solution description, instantiated generic structures, traces for both problem statements.
+
+</TD><TD WIDTH=56>9</TD></TR>
+
+
+
+<TR><TD WIDTH=56><B>4</B></TD><TD WIDTH=282>Knowledge acquisition approach, i.e., links between the knowledge structures of the tool and actions or utterances of the protocol; justifications and design decisions; and questions arising from the modeling process that one would address to Sigi.
+
+</TD><TD WIDTH=56>5</TD></TR>
+
+
+
+</TABLE>
+
+</DIV>
+
+
+
+<P>
+
+To refer to the protocol elements in the papers, one should use
+
+the numbers on the left of the action descriptions (e.g. Action
+
+1), respectively those on the left of the comments (e.g., Comment
+
+1a).
+
+
+
+
+
+<H2>2. Statement of the Sample Problem</H2>
+
+<P ALIGN="CENTER"><IMG SRC="Image1.gif">
+
+<P ALIGN="CENTER"><B>Figure 1: The ch&acirc;teau of HNE. YQT resides on
+
+the first floor</B>
+
+<P>
+
+The members of the research group YQT  of the HNE laboratory are
+
+moved to a new floor of their ch&acirc;teau. Due to severe cuts
+
+in funding they only get a very limited number of offices. It
+
+will be quite a problem to cram them all in. To complicate matters
+
+even further some will have to share an office. After several
+
+vain attempts each ending as nightmares that would have impressed
+
+Freddy, the management of HNE is desperate. Sisyphus-I is their
+
+last hope. HNE  implores the Sisyphus-I teams to provide knowledgeable
+
+systems that are up to the task.
+
+<HR>
+
+
+
+<P ALIGN="CENTER"><IMG SRC="Image2.gif">
+
+<P ALIGN="CENTER"><B>Figure 2: The part of the floor-plan of the ch&acirc;teau
+
+that we will consider in our sample application</B>
+
+<P>
+
+It is important that the systems' ways to solve the problem follow
+
+the shining example of the wizard Siggi D., the only one who ever
+
+managed to solve the problem. The system developers should be
+
+aware of the fact that YQT's members are used to be pampered.
+
+They all have their personal preferences and professional peculiarities
+
+that should better be observed, as the dungeons of the BABYLON
+
+tower are deep and lonely.
+
+<H3>2.1. Data on People and Offices</H3>
+
+<H4>2.1.1. Description of the Members of YQT:</H4>
+
+<P>
+
+Not all members of YQT can profit from this new office space in
+
+the ch&acirc;teau, about half of the group stay in their old offices.
+
+Those that are concerned by the new assignment are:
+
+
+
+<P><DIV ALIGN="CENTER">
+
+<TABLE BORDER CELLPADDING=6>
+
+
+
+<TR><TD WIDTH=211>Werner L.<BR>
+
+Role = Researcher<BR>
+
+Project = RESPECT<BR>
+
+Smoker = No<BR>
+
+Hacker = True<BR>
+
+Works-with= Angi W., Marc M.
+
+</TD><TD WIDTH=211>J&uuml;rgen L.<BR>
+
+Role = Researcher<BR>
+
+Project = EULISP<BR>
+
+Smoker = No<BR>
+
+Hacker = True<BR>
+
+Works-with= Harry C., Thomas D.
+
+</TD></TR>
+
+
+
+<TR><TD WIDTH=211>Marc M.<BR>
+
+Role = Researcher<BR>
+
+Project = KRITON<BR>
+
+Smoker = No<BR>
+
+Hacker = True<BR>
+
+Works-with= Angi W., Werner L.
+
+</TD><TD WIDTH=211>Angi W.<BR>
+
+Role = Researcher<BR>
+
+Project = RESPECT<BR>
+
+Smoker = No<BR>
+
+Hacker = No<BR>
+
+Works-with = Marc M., Werner L.
+
+</TD></TR>
+
+
+
+<TR><TD WIDTH=211>Andy L.<BR>
+
+Role = Researcher<BR>
+
+Project = TUTOR2000<BR>
+
+Smoker = Yes<BR>
+
+Hacker = No<BR>
+
+Works-with = 
+
+</TD><TD WIDTH=211>Michael T.<BR>
+
+Role = Researcher<BR>
+
+Project = BABYLON Product<BR>
+
+Smoker = No<BR>
+
+Hacker = Yes<BR>
+
+Works-with = Hans W.
+
+</TD></TR>
+
+
+
+<TR><TD WIDTH=211>Harry C.<BR>
+
+Role = Researcher<BR>
+
+Project = EULISP<BR>
+
+Smoker = No<BR>
+
+Hacker = Yes<BR>
+
+Works-with = J&uuml;rgen L., Thomas D.
+
+</TD><TD WIDTH=211>Uwe T.<BR>
+
+Role = Researcher<BR>
+
+Project = Autonomous Systems<BR>
+
+Smoker = Yes<BR>
+
+Hacker = Yes<BR>
+
+Works-with = 
+
+</TD></TR>
+
+
+
+<TR><TD WIDTH=211>Thomas D.<BR>
+
+Role = Researcher<BR>
+
+Project = EULISP<BR>
+
+Smoker = No<BR>
+
+Hacker = No<BR>
+
+Works-with = J&uuml;rgen L., Harry B.
+
+</TD><TD WIDTH=211>Monika X.<BR>
+
+Role = Secretary<BR>
+
+Smoker = No<BR>
+
+Hacker = No<BR>
+
+Works-with = Thomas D., Ulrike U., <BR>
+
+  Eva I.
+
+</TD></TR>
+
+
+
+<TR><TD WIDTH=211>Ulrike U.<BR>
+
+Role = secretary<BR>
+
+Smoker = No<BR>
+
+Hacker = No<BR>
+
+Works-with = Thomas D., Monika X.,<BR>
+
+  Eva I.
+
+</TD><TD WIDTH=211>Hans W.<BR>
+
+Role = Researcher<BR>
+
+Project = BABYLON Product<BR>
+
+Smoker = Yes<BR>
+
+Hacker = No<BR>
+
+Works-with = Michael T.
+
+</TD></TR>
+
+
+
+<TR><TD WIDTH=211>Eva I.<BR>
+
+Role = Manager<BR>
+
+Smoker = No<BR>
+
+Hacker = No<BR>
+
+Works-with = Thomas D., Ulrike U.,<BR>
+
+  Monika X.
+
+</TD><TD WIDTH=211>Joachim I.<BR>
+
+Role = Researcher<BR>
+
+Project = ASERTI<BR>
+
+Smoker = No<BR>
+
+Hacker = No<BR>
+
+Works-with = 
+
+</TD></TR>
+
+
+
+<TR><TD WIDTH=211>Katharina N.<BR>
+
+Role = Researcher<BR>
+
+Project = MLT<BR>
+
+Smoker = Yes<BR>
+
+Hacker = Yes<BR>
+
+Works-with = 
+
+</TD><TD WIDTH=211></TD></TR>
+
+
+
+</TABLE>
+
+</DIV>
+
+
+
+<H4>2.1.2. Hierarchical Structures Within YQT:</H4>
+
+<P>
+
+Within the subset of members of YQT we have the following organizational
+
+structure:
+
+<P>
+
+Thomas D. is the head of the group YQT; Eva I. manages YQT; Monika
+
+X. and Ulrike U. are the secretaries; Werner L. and Angi W. work
+
+together in the RESPECT project; Harry B., J&uuml;rgen L. and
+
+Thomas D. work in the EULISP project; Michael M. and Hans W. work
+
+in the Babylon Product project; Hans W. is the head of this large
+
+project, Marc M., Uwe T. and Andy L. pursue individual projects;
+
+Katharina N. and Joachim I. are heads of larger projects that
+
+are not considered in this problem.
+
+
+
+<H4>2.1.3. The Offices on YQT's Floor of the Ch&acirc;teau</H4>
+
+<P>
+
+C5-123, C5-122, C5-121, C5-120, C5-119 and C5-117 are large rooms
+
+that can host two researchers. Large rooms can be assigned to
+
+heads of groups too. C5-113, C5-114, C5-115 and C5-116 are single
+
+rooms.
+
+
+
+<H3>2.2. A Sample Transcript of a Protocol</H3>
+
+
+
+<P><DIV ALIGN="CENTER">
+
+<TABLE BORDER CELLPADDING=6>
+
+<TR><TD COLSPAN=2 WIDTH=146><B>The words of the wizard Siggi D.</B>
+
+</TD><TD COLSPAN=2 WIDTH=294><B>Comments, questions and annotations</B>
+
+</TD></TR>
+
+
+
+<TR><TD WIDTH=22><B>1</B></TD><TD WIDTH=124>Put Thomas D. into office C5&#173;117
+
+</TD><TD WIDTH=28><B>1a<BR><BR><BR><BR>1b</B></TD><TD WIDTH=266>The head of group needs a central office, so that he/she is as close to all the members of the group as possible. This should be a large office.
+
+<P>
+
+This assignment is defined first, as the location of the office of the head of group restricts the possibilities of the subsequent assignments.
+
+</TD></TR>
+
+
+
+<TR><TD WIDTH=22><B>2</B></TD><TD WIDTH=124>Monika X. and Ulrike U. into office C5&#173;119
+
+</TD><TD WIDTH=28><B>2a</B></TD><TD WIDTH=266>The secretaries' office should be located close to the office of the head of group. Both secretaries should work together in one large office. This assignment is executed as soon as possible, as its possible choices are extremely constrained.
+
+</TD></TR>
+
+
+
+<TR><TD WIDTH=22><B>3</B></TD><TD WIDTH=124>Eva I. into C5-116
+
+</TD><TD WIDTH=28><B>3a<BR><BR><BR><BR>3b</B></TD><TD WIDTH=266>The manager must have maximum access to the head of group and to the secretariat. At the same time he/she should have a centrally located office. A small office will do.
+
+<P>
+
+This is the earliest point where this decision can be taken.
+
+</TD></TR>
+
+
+
+<TR><TD WIDTH=22><B>4</B></TD><TD WIDTH=124>Joachim I. into C5-115
+
+</TD><TD WIDTH=28><B>4a</B></TD><TD WIDTH=266>The heads of large projects should be close to the head of group and the secretariat. There really is no reason for the sequence of the assignments of Joachim, Hans and Katharina.
+
+</TD></TR>
+
+
+
+<TR><TD WIDTH=22><B>5</B></TD><TD WIDTH=124>Hans W. into C5-114
+
+</TD><TD WIDTH=28><B>5a</B></TD><TD WIDTH=266>The heads of large projects should be close to the head of group and the secretariat.
+
+</TD></TR>
+
+
+
+<TR><TD WIDTH=22><B>6</B></TD><TD WIDTH=124>Katharina N. into C5-113
+
+</TD><TD WIDTH=28><B>6a</B></TD><TD WIDTH=266>The heads of large projects should be close to the head of group and the secretariat.
+
+</TD></TR>
+
+
+
+<TR><TD WIDTH=22><B>7</B></TD><TD WIDTH=124>Andy K. and Uwe T. into C5&#173;120
+
+</TD><TD WIDTH=28><B>7a</B></TD><TD WIDTH=266>Both smoke. To avoid conflicts with non-smokers they share an office. Neither of them is eligible for a single office. This is the first twin-room assignment, as the smoker/non-smoker conflict is a severe one.
+
+</TD></TR>
+
+
+
+<TR><TD WIDTH=22><B>8</B></TD><TD WIDTH=124>Werner L. and J&uuml;rgen L into C5&#173;123
+
+</TD><TD WIDTH=28><B>8a<BR><BR><BR><BR><BR><BR><P>8b</B></TD><TD WIDTH=266>They are both implementing systems, both non-smokers. They do not work in the same project, but they work on related subjects. Members of the same project should not share offices. Sharing with members of other projects enhances synergy effects within the research group.
+
+<P>There really are no criteria of the sequence of these twin room assignments.
+
+</TD></TR>
+
+
+
+<TR><TD WIDTH=22><B>9</B></TD><TD WIDTH=124>Marc M. and Angi W. into C5&#173;122
+
+</TD><TD WIDTH=28><B>9a</B></TD><TD WIDTH=266>Marc is implementing systems, Angi isn't. This should not be a problem. Putting them together would ensure good cooperation between the RESPECT and the KRITON projects.
+
+</TD></TR>
+
+
+
+<TR><TD WIDTH=22><B>10</B></TD><TD WIDTH=124>Harry C. and Michael T. into C5&#173;121
+
+</TD><TD WIDTH=28><B>10a</B></TD><TD WIDTH=266>They are both implementing systems. Harry develops object systems, Michael uses them. This creates synergy.
+
+</TD></TR>
+
+</TABLE>
+
+</DIV>
+
+
+
+<H3>2.3. Note 1</H3>
+
+<P>
+
+Our wizard Siggi D. seems to pursue a general strategy of assigning
+
+the head of group and the staff personnel first, followed by the
+
+heads of large projects, who through their seniority are eligible
+
+for single offices (some are more equal then others). The offices
+
+of the head of group and the staff should be close to each other.
+
+Heads of projects should, if possible be allocated offices close
+
+to the head of group's. 
+
+<H3>2.4. Note 2</H3>
+
+<P>
+
+Twin offices are assigned to the members of research projects,
+
+under the consideration that synergy among projects is boosted.
+
+This means that researchers that work in same projects are, if
+
+possible not sharing an office. Coworkers that work on related
+
+subjects can share an office. It is important not to put smokers
+
+and non-smokers together into twin offices.
+
+
+
+<H3>2.5. A Second Problem Statement</H3>
+
+<P>
+
+The second problem statement reflects a a more recent situation
+
+at HNE. Katharina N. left, and Christian-I joined the group. Christian
+
+I. is just a researcher, he smokes, he works in MLT, and he is
+
+a hacker. He is <I>not </I> a head of project.
+
+<P>
+
+The office situation stays the same. Again, all the members of
+
+the group must be assigned. Obviously, the situation has changed,
+
+and the system must show how it copes with this slightly modified
+
+data-set.
+
+<P>
+
+Remember that this second problem statement has been introduced
+
+to adress the issue of brittleness. We would like to see which
+
+general precautions your model takes, so that it can cope with
+
+borderline cases.
+
+<P><HR>
+
+<P><i>Problem statement prepared by Marc Linster and converted for web by Brian Gaines.</i>
+
+</BODY>
+
+
+
+</HTML>
+

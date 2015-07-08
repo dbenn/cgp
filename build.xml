@@ -1,0 +1,10 @@
+<project name="VStar" default="dist" basedir=".">
+  <description>
+    Ant build file for pCG.
+  </description>
+
+  <!-- Set global properties for this build -->
+  
+  <property name="src" location="." />
+
+</project>

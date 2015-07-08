@@ -1,9 +1,10 @@
 # cgp
 Conceptual Graph processes
 
-Preface
+Preface (2015)
 -------
-This was an outcome of Masters work ending in 2001 as evidenced by a hint of anacronism.
+This was an outcome of Masters work ending in 2001 as evidenced by the odd
+anacronism.
 
 Introduction
 ------------
@@ -11,17 +12,16 @@ Welcome to the ICCS 2001 release of pCG, version 0.1!
 
 The name "pCG" is symbolic of a process operating upon a CG.
 
-Go to http://www.adelaide.net.au/~dbenn/Masters/ for the context of this
+Go to http://www.users.on.net/~dbenn/Masters/iccs2001/ for the context of this
 language which is the outcome of my coursework Masters thesis at the
 University of South Australia under the supervision of Dan Corbett.
 
-Please send all comments and questions to me at djbenn@ozemail.com.au or
-david_benn@asclink.net.au
+Please send all comments and questions to me at dbenn@computer.org
 
 Installation
 ------------
 By reading this file, you've completed the most important step: unzipping the
-archive with a WinZip or zip utility.
+archive.
 
 The distribution comes with pre-built Java code (in the lib directory) and
 invocation scripts for Unix and Windows: pCG and pCG.bat respectively. Change
@@ -147,8 +147,8 @@ respect to pCG's run-time type attributes and operations. See the source code
 
 Distribution
 ------------
-pCG distribution is freely redistributable under the Gnu Public Licence.
-See gpl.html. See also the licensing directory under <root>/cgp/lib.
+pCG distribution is freely redistributable under the BSD 3 clause license.
+See the licensing directory under <root>/cgp/lib.
 
 Bugs
 ----

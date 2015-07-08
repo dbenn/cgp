@@ -1,0 +1,18 @@
+// A minimal pCG program that opens a file, reads a file of CGs in the 1999
+// version and generates those graphs in a form which is compliant with the
+// June 2001 standard. Standard output is the destination.
+
+option CGIFgen = "cgp.translators.CGIFGenerator";
+
+if _ARGS.length == 1 then 
+  f = file (_ARGS[1]);
+  lines = f.readall();
+  f.close();
+  foreach line in lines do
+    if line.length != 0 then
+      println line.toGraph();
+    end else
+      println ""; // include empty lines in output
+    end
+  end
+end

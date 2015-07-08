@@ -1,0 +1,11 @@
+#!/bin/sh
+#
+# Bourne shell script to invoke Conceptual Graph Processes interpreter.
+
+PCG_HOME=$(dirname "$0")/lib
+ANTLR_HOME=$PCG_HOME
+NOTIO_HOME=$PCG_HOME
+CGP_HOME=$PCG_HOME
+NEW_TYPES_ROOT=$(dirname "$0")/cgp
+
+java -classpath $ANTLR_HOME/antlr.jar:$NOTIO_HOME/Notio.jar:$CGP_HOME/cgp.jar:$NEW_TYPES_ROOT cgp.CGP $*

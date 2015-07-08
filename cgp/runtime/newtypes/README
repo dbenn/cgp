@@ -1,0 +1,6 @@
+Add new Type subclasses here.
+
+Mandatory
+---------
+- Subclass cgp.runtime.Type.
+- Call setType() within constructor to set type name.

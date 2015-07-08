@@ -1,0 +1,3 @@
+class INT_SET is
+  include FSET{INT} has -> member ;
+end;
