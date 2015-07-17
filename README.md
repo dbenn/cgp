@@ -4,7 +4,8 @@ Conceptual Graph processes
 Preface (2015)
 -------
 This was an outcome of Masters work ending in 2001 as evidenced by the odd
-anacronism.
+anacronism. Small edits have been made but the text is largely as it was 
+in 2001.
 
 Introduction
 ------------
@@ -67,11 +68,9 @@ pCG comes with the Java class libraries it requires in cgp/lib, specifically
 those for Antlr (2.7.0) and Notio (0.2.2).
 
 pCG has been tested under Linux 2.2 (RedHat 6.0), Windows 98, and a few
-versions of Solaris/SunOS, but primarily the first two. Despite being
-Java software, I won't make any claims about whether pCG will run on
-other operating systems, but please let me know if you are using another
-OS apart from the ones listed, e.g. Mac.
-
+versions of Solaris/SunOS, but primarily the first two, and more recently under Mac OS X. Despite being Java software, I won't make any claims about whether 
+pCG will run on other operating systems, but please let me know if you are 
+using another OS apart from the ones listed.
 Usage
 -----
 pCG is a command-line interpreter but has no interactive mode. Edit a pCG
@@ -147,8 +146,7 @@ respect to pCG's run-time type attributes and operations. See the source code
 
 Distribution
 ------------
-pCG distribution is freely redistributable under the BSD 3 clause license.
-See the licensing directory under <root>/cgp/lib.
+pCG distribution is freely redistributable under the GPL version 2 licence.
 
 Bugs
 ----
