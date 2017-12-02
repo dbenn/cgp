@@ -71,6 +71,7 @@ pCG has been tested under Linux 2.2 (RedHat 6.0), Windows 98, and a few
 versions of Solaris/SunOS, but primarily the first two, and more recently under Mac OS X. Despite being Java software, I won't make any claims about whether 
 pCG will run on other operating systems, but please let me know if you are 
 using another OS apart from the ones listed.
+
 Usage
 -----
 pCG is a command-line interpreter but has no interactive mode. Edit a pCG
